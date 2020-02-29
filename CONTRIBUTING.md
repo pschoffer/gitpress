@@ -1,0 +1,3 @@
+# CONTRIBUTING
+
+Yes, please!
