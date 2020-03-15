@@ -2,6 +2,8 @@ This is **highly experimental** project stage. I do not recomend using it to any
 
 # GitPress
 
+<span><a href="https://hub.docker.com/repository/docker/pschoffer/gitpress" title="View this project on docker hub"><img src="https://img.shields.io/docker/cloud/build/pschoffer/gitpress" alt="Docker hub build" /></a></span>
+
 The aim of this project is to have git backed [WordPress](https://wordpress.org/) installation. It is basicaly a wrapper around [versionpress](https://versionpress.com/) and hidden mysql.
 
 As the persistance happen in git repo, the only usage of mysql is for "caching".
