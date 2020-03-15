@@ -55,4 +55,30 @@ Fetches the instalation from Git and restores it.
 
 ## Example usage
 
-TODO
+You can start by fetching the example project.
+
+```
+docker run -p 80:80 -d \
+    --env "GITPRESS_MODE=FETCH" \
+    --env "WORDPRESS_URL=http://localhost/" \
+    --env "GIT_ORIGIN=github.com/pschoffer/gitpress-example.git" \
+    pschoffer/gitpress
+```
+
+Docker compose version:
+
+```
+version: '3.1'
+
+services:
+  gitpress:
+    image: pschoffer/gitpress
+    ports:
+      - 80:80
+    environment:
+      GITPRESS_MODE: FETCH
+      WORDPRESS_URL: http://localhost/
+      GIT_ORIGIN: github.com/pschoffer/gitpress-example.git
+```
+
+The admin login credentials are `gitpress:pass`
