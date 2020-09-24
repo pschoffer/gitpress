@@ -15,15 +15,13 @@ RUN set -eux; \
   apt-get install -y --no-install-recommends \
   # Ghostscript is required for rendering PDF previews
   ghostscript \
-  ; \
-  rm -rf /var/lib/apt/lists/*
+  ;
 
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
   \
   savedAptMark="$(apt-mark showmanual)"; \
   \
-  apt-get update; \
   apt-get install -y --no-install-recommends \
   libfreetype6-dev \
   libjpeg-dev \
@@ -53,10 +51,7 @@ RUN set -ex; \
   | xargs -r dpkg-query -S \
   | cut -d: -f1 \
   | sort -u \
-  | xargs -rt apt-mark manual; \
-  \
-  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-  rm -rf /var/lib/apt/lists/*
+  | xargs -rt apt-mark manual;
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -105,10 +100,19 @@ RUN set -eux; \
 # Custom part
 ####
 
+RUN { \
+  echo 'max_execution_time = 300'; \
+  echo 'upload_max_filesize = 128M'; \
+  echo 'post_max_size = 256M'; \
+  echo 'memory_limit = 128M'; \
+  echo 'max_input_vars = 1500'; \
+  } > "$PHP_INI_DIR"/php.ini
+
 RUN mkdir /run/mysqld && chmod 777 /run/mysqld
 
-RUN apt-get update && \
-  apt-get install -y mariadb-client mariadb-server git unzip
+RUN apt-get install -y mariadb-client mariadb-server git unzip
+
+RUN rm -rf /var/lib/apt/lists/*
 
 COPY bin/* /usr/local/bin/
 COPY plugins/* /usr/src/versionpress/
