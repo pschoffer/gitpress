@@ -115,7 +115,7 @@ RUN apt-get install -y mariadb-client mariadb-server git unzip
 RUN rm -rf /var/lib/apt/lists/*
 
 COPY bin/* /usr/local/bin/
-COPY plugins/* /usr/src/versionpress/
+COPY mu-plugins/* /usr/src/versionpress/
 COPY db_init.sql /etc/db_init.sql
 
 ENTRYPOINT ["docker_entrypoint.sh"]
