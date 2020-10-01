@@ -1,13 +1,18 @@
 version: 2.0
+
 workflows:
+  version: 2
   main:
-   jobs:
-    build:
-      docker:
-        - image: cibuilds/docker:19.03
-        - run:
-           name: "Build Docker Image"
-           command: docker build --file Dockerfile
-      
+    jobs:
+      - build
 
-
+jobs:
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: "Build Docker Image"
+          command: docker build
