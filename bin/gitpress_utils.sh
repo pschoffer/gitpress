@@ -59,14 +59,13 @@ function installWP {
     --admin_email="${WORDPRESS_EMAIL:-test@test.com}" \
     --allow-root
   
-  wp plugin install /usr/src/versionpress/*.zip --activate --allow-root
+  
   wp vp activate --allow-root
 }
 
 function restoreWP {
-  info "Restoring WP"
-  unzip /usr/src/versionpress/versionpress-4.0-beta2.zip -d wp-content/plugins/            
-  wp vp restore-site --siteurl="${WORDPRESS_URL:-http://localhost}" --require=wp-content/plugins/versionpress/src/Cli/vp.php --yes --allow-root
+  info "Restoring WP"         
+  wp vp restore-site --siteurl="${WORDPRESS_URL:-http://localhost}" --require=wp-content/mu-plugins/versionpress/src/Cli/vp.php --yes --allow-root
 }
 
 function getGitEndpoint {
