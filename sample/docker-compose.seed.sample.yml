@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  gitpress:
+    build: ../.
+    ports:
+      - 80:80
+    environment:
+      GITPRESS_MODE: SEED
+      WORDPRESS_TITLE: Cool Wordpress Site
+      WORDPRESS_USER: admin
+      WORDPRESS_PASSWORD: secret
+      WORDPRESS_EMAIL: admin@local.com
+      WORDPRESS_URL: http://localhost/
+      GIT_ORIGIN: <REPO>
+      GIT_USER: <USER>
+      GIT_PASSWORD: <PASS>
