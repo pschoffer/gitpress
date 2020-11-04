@@ -6,7 +6,7 @@ services:
     ports:
       - 80:80
     environment:
-      GITPRESS_MODE: SEED
+      GITPRESS_MODE: SEED_SQL
       WORDPRESS_TITLE: Cool Wordpress Site
       WORDPRESS_USER: admin
       WORDPRESS_PASSWORD: secret
