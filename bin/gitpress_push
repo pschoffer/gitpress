@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+# shellcheck disable=SC1091
+source gitpress_utils.sh
+
+if isUsingDBDump; then
+  dumpDB
+fi
+commitGit
+pushGit
+

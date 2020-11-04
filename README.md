@@ -4,9 +4,15 @@ This is **highly experimental** project stage. I do not recomend using it to any
 
 <span><a href="https://hub.docker.com/repository/docker/pschoffer/gitpress" title="View this project on docker hub"><img src="https://img.shields.io/docker/cloud/build/pschoffer/gitpress" alt="Docker hub build" /></a></span>
 
-The aim of this project is to have git backed [WordPress](https://wordpress.org/) installation. It is basicaly a wrapper around [versionpress](https://versionpress.com/) and hidden mysql.
+The aim of this project is to have git backed [WordPress](https://wordpress.org/) installation.
 
-As the persistance happen in git repo, the only usage of mysql is for "caching".
+There are two *modes* of working.
+
+One is based on [versionpress](https://versionpress.com/)
+
+The other is using SQL dump.
+
+All the persistance happen in git repo, the only usage of mysql is for "caching".
 
 The main use case is when you have static websites with a small amount of changes and don't plan to use DB that much. But you still like to levarage the CMS part of WordPress.
 
@@ -14,23 +20,27 @@ The main use case is when you have static websites with a small amount of change
 
 - You don't need to care about DB (no uptime, backups, hosting of mysql)
 - You version control data (pages, posts, users, ...) as well as files (themes, plugins, ...)
-- All the benefits of versionpress (rollbacks, reproducing the same site on different server)
+- All the benefits of git (rollbacks, reproducing the same site on different server)
 
 ## Downsides
 
 - Your backup is only as good as your last pushed commit
-- Currently there is no UI to `git push`, you need to do it from server
+- Currently there is no UI to `push`, you need to do it from server
 - DB can crash on you and you will lose all the data since last `git push`
+
+## Pushing
+
+There is a executable `gitpress_push` to create DB export (if in SQL mode), add all the file changes, commit change and push to repo.
 
 ## Modes
 
 This image has 2 modes. The default mode is `FETCH` mode. Variable `GITPRESS_MODE` chooses the mode.
 
-### SEED Mode
+### SEED_VP and SEED_SQL Mode
 
-Purpose of this mode is to create a fresh new instance of WordPress initialized with versionpress and push everything in the repo of your choice. It will keep the instance alive and it is OK to keep using it.
+Purpose of this mode is to create a fresh new instance of WordPress and push everything in the repo of your choice. It will keep the instance alive and it is OK to keep using it.
 
-### SEED Mode Specific Config
+### Seed Mode Specific Config (same for SEED_VP and SEED_SQL)
 
 Supported config switches
 
