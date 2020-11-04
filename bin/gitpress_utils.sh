@@ -63,6 +63,17 @@ function dumpDB {
   wp db export --add-drop-table --allow-root "$SQL_DUMP_FILE"
 }
 
+function importDB {
+  createDB
+  wp db import --allow-root "$SQL_DUMP_FILE"
+}
+
+function createDB {
+    info "Creating DB"
+    wp db create --allow-root
+}
+
+
 function createWPConfig {
   if [[ ! -f "$WORDPRESS_CONFIG_FILE" ]]; then
     info "$WORDPRESS_CONFIG_FILE is not present, will create one"
@@ -72,8 +83,7 @@ function createWPConfig {
       --dbhost="0.0.0.0" \
       --allow-root
 
-    info "Creating DB"
-    wp db create --allow-root
+    createDB
   fi
 }
 
@@ -104,8 +114,13 @@ function installVP {
 
 function restoreWP {
   info "Restoring WP"
-  unzip /usr/src/versionpress/versionpress-4.0-beta2.zip -d wp-content/plugins/
-  wp vp restore-site --siteurl="${WORDPRESS_URL:-http://localhost}" --require=wp-content/plugins/versionpress/src/Cli/vp.php --yes --allow-root
+
+  if isUsingDBDump; then
+    importDB
+  else
+    unzip /usr/src/versionpress/versionpress-4.0-beta2.zip -d wp-content/plugins/
+    wp vp restore-site --siteurl="${WORDPRESS_URL:-http://localhost}" --require=wp-content/plugins/versionpress/src/Cli/vp.php --yes --allow-root
+  fi
 }
 
 function getGitEndpoint {
