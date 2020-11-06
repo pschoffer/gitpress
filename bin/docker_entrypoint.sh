@@ -33,6 +33,8 @@ else
   fi
 
   createWPConfig
+  createDB
+
   restoreWP
 
   chown -R www-data .

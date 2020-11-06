@@ -64,7 +64,6 @@ function dumpDB {
 }
 
 function importDB {
-  createDB
   wp db import --allow-root "$SQL_DUMP_FILE"
 }
 
@@ -82,8 +81,6 @@ function createWPConfig {
       --dbpass="pass" \
       --dbhost="0.0.0.0" \
       --allow-root
-
-    createDB
   fi
 }
 
@@ -96,6 +93,8 @@ function installWP {
   fi
 
   createWPConfig
+
+  createDB
 
   wp core install --url="${WORDPRESS_URL:-http://localhost}" \
     --title="${WORDPRESS_TITLE:-test_title}" \
