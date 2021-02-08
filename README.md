@@ -67,6 +67,10 @@ Fetches the instalation from Git and restores it.
 | SSL_DOMAIN    | `your.domain.com`               | Domain to get cert for            |
 | SSL_EMAIL     | `hi@your.domain.com`            | Email to be notified about expiration and so on             |
 
+## SSL certs
+
+Let's encrypt capability is packaged in so providing `SSL_DOMAIN` and `SSL_EMAIL` should do al you need to get the certs including the redirects.
+
 ## Example usage
 
 You can start by fetching the example project.
