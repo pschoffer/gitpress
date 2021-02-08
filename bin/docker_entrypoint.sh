@@ -40,4 +40,9 @@ else
   chown -R www-data .
 fi
 
+if [[ ! -z "$SSL_DOMAIN" ]]; then
+  certbot --apache -d ${SSL_DOMAIN} --debug -n --agree-tos --email ${SSL_EMAIL}
+fi
+
+
 apache2-foreground

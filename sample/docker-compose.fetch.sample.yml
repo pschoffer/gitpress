@@ -5,6 +5,7 @@ services:
     build: ../.
     ports:
       - 80:80
+      - 443:443
     environment:
       GITPRESS_MODE: FETCH
       WORDPRESS_URL: http://localhost/
