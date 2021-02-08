@@ -40,9 +40,11 @@ else
   chown -R www-data .
 fi
 
+service apache2 start
+
 if [[ ! -z "$SSL_DOMAIN" ]]; then
   certbot --apache -d ${SSL_DOMAIN} --debug -n --agree-tos --email ${SSL_EMAIL}
 fi
 
+tail -f /dev/null
 
-apache2-foreground
