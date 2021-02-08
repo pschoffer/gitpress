@@ -3,7 +3,7 @@
 # https://github.com/docker-library/wordpress/blob/master/php7.3/apache/Dockerfile
 #
 # The official image however has a VOLUME /var/www/html line, that makes it
-# difficult to dome prepare some stuff. That's why we take here 
+# difficult to dome prepare some stuff. That's why we take here
 # only part of the official Dockerfile and append some custom parts bellow it
 ####
 
@@ -100,6 +100,15 @@ RUN set -eux; \
 # Custom part
 ####
 
+
+# SSL requirements
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y gpg
+RUN add-apt-repository -y ppa:certbot/certbot
+RUN apt-get install -y certbot python-certbot-apache
+
+# other
 RUN { \
   echo 'max_execution_time = 300'; \
   echo 'upload_max_filesize = 128M'; \

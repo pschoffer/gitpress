@@ -64,6 +64,8 @@ Fetches the instalation from Git and restores it.
 | GIT_ORIGIN    | `gitlab.com/yourGroup/yourRepo` | Remote repo to point the repo to |
 | GIT_USER      | `systemUser`                    | Remote repo user                 |
 | GIT_PASSWORD  | `systemUserPassword`            | Remote repo password             |
+| SSL_DOMAIN    | `your.domain.com`               | Domain to get cert for            |
+| SSL_EMAIL     | `hi@your.domain.com`            | Email to be notified about expiration and so on             |
 
 ## Example usage
 
